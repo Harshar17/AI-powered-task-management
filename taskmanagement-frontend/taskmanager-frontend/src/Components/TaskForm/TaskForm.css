@@ -1,0 +1,177 @@
+.task-form {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.task-form h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    color: #111827;
+}
+
+.task-form-subtitle {
+    margin: 0 0 22px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.task-form label {
+    display: block;
+    margin: 15px 0 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 14px;
+    background: white;
+}
+
+.task-form input:focus,
+.task-form textarea:focus,
+.task-form select:focus {
+    outline: none;
+    border-color: #7c3aed;
+}
+
+.task-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+/* ================================ */
+/* AI BUTTON */
+/* ================================ */
+
+.ai-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    background: #7c3aed;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ai-button:hover {
+    background: #6d28d9;
+}
+
+.ai-button:disabled {
+    background: #a78bfa;
+    cursor: not-allowed;
+}
+
+
+/* ================================ */
+/* AI RESULT */
+/* ================================ */
+
+.ai-result {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.ai-result h2 {
+    margin-bottom: 20px;
+}
+
+
+/* ================================ */
+/* ESTIMATED TIME */
+/* ================================ */
+
+.estimated-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0;
+    padding: 13px 15px;
+    background: #f5f3ff;
+    border-radius: 7px;
+    color: #4c1d95;
+    font-size: 14px;
+}
+
+
+/* ================================ */
+/* CREATE BUTTON */
+/* ================================ */
+
+.create-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    background: #16a34a;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    background: #15803d;
+}
+
+.create-button:disabled {
+    background: #86efac;
+    cursor: not-allowed;
+}
+
+
+/* ================================ */
+/* ANIMATION */
+/* ================================ */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ================================ */
+/* MOBILE */
+/* ================================ */
+
+@media (max-width: 600px) {
+
+    .task-form {
+        padding: 18px;
+    }
+
+    .task-form h2 {
+        font-size: 21px;
+    }
+
+    .estimated-time {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
