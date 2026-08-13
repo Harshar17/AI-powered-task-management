@@ -101,3 +101,36 @@ The application follows a three-layer architecture.
                  |
                  v
           Google Gemini AI
+
+## 4. ER-Diagram
+
+The application database architecture.
+
+```text
+  ┌──────────────────────┐
+│        USER          │
+├──────────────────────┤
+│ PK id                │
+│    name              │
+│    email             │
+│    password          │
+└──────────┬───────────┘
+           │
+           │ 1
+           │
+           │ *
+┌──────────▼───────────┐
+│        TASK          │
+├──────────────────────┤
+│ PK id                │
+│    title             │
+│    description       │
+│    status            │
+│    priority          │
+│    created_at        │
+│    due_date          │
+│ FK user_id           │
+└──────────────────────┘
+
+
+
