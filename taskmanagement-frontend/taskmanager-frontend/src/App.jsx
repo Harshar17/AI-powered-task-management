@@ -8,7 +8,7 @@ import {
 
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
-import Dashboard from "./Pages/Dashboard/DashBoard";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 
 import ProtectedRoute
     from "./Components/ProtectedRoute/ProtectedRoute";
