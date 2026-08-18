@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../../services/api";
 
-import TaskForm from "../../components/TaskForm/TaskForm";
-import TaskCard from "../../components/TaskCard/TaskCard";
-import Navbar from "../../components/Navbar/Navbar";
+import TaskForm from "../../Components/TaskForm/TaskForm";
+import TaskCard from "../../Components/TaskCard/TaskCard";
+import Navbar from "../../Components/Navbar/Navbar";
 
 import "./Dashboard.css";
 
