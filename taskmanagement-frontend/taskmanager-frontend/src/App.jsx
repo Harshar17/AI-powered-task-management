@@ -6,12 +6,12 @@ import {
 } from "react-router-dom";
 
 
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
+import Dashboard from "./Pages/Dashboard/DashBoard";
 
 import ProtectedRoute
-    from "./components/ProtectedRoute/ProtectedRoute";
+    from "./Components/ProtectedRoute/ProtectedRoute";
 
 
 function App() {
