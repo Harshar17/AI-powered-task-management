@@ -40,7 +40,10 @@ public class SecurityConfig {
                 new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
+                List.of(
+                        "http://localhost:5173",
+                        "https://innovative-healing-production-a0a7.up.railway.app"
+                )
         );
 
         configuration.setAllowedMethods(
