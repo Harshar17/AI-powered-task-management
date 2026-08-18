@@ -87,8 +87,7 @@ function Login() {
                         }
                         required
                     />
-
-
+                    
                     <label>
                         Password
                     </label>

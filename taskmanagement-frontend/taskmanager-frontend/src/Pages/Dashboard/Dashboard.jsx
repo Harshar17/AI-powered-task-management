@@ -296,7 +296,7 @@ const Dashboard = () => {
 
                         <input
                             type="text"
-                            placeholder="🔍 Search tasks by title..."
+                            placeholder="Search tasks by title..."
                             value={search}
                             onChange={(e) =>
                                 setSearch(e.target.value)

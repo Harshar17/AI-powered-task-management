@@ -20,6 +20,10 @@ public class AiServiceImpl implements AiService {
 
         String apiKey = System.getenv("Gemini-API");
 
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new RuntimeException("Gemini API key is missing");
+        }
+
         String prompt = """
                 Create a complete task based on the following task title.
 
@@ -90,24 +94,107 @@ public class AiServiceImpl implements AiService {
                             HttpResponse.BodyHandlers.ofString()
                     );
 
+            System.out.println("=================================");
             System.out.println("Gemini Status: " + response.statusCode());
             System.out.println("Gemini Response: " + response.body());
+            System.out.println("=================================");
 
             ObjectMapper mapper = new ObjectMapper();
 
             JsonNode root = mapper.readTree(response.body());
 
-            String text = root
-                    .get("candidates")
-                    .get(0)
-                    .get("content")
-                    .get("parts")
-                    .get(0)
-                    .get("text")
-                    .asText();
+            // Check API error first
+            if (response.statusCode() != 200) {
+
+                String errorMessage = "Gemini API error";
+
+                if (root.get("error") != null) {
+
+                    JsonNode errorNode = root.get("error");
+
+                    if (errorNode.get("message") != null) {
+                        errorMessage =
+                                errorNode.get("message").asText();
+                    }
+                }
+
+                throw new RuntimeException(
+                        "Gemini API Error: " + errorMessage
+                );
+            }
+
+            // Check candidates
+            JsonNode candidates = root.get("candidates");
+
+            if (candidates == null ||
+                    candidates.isEmpty()) {
+
+                throw new RuntimeException(
+                        "Gemini returned no candidates. Response: "
+                                + response.body()
+                );
+            }
+
+            JsonNode content =
+                    candidates.get(0).get("content");
+
+            if (content == null) {
+
+                throw new RuntimeException(
+                        "Gemini response does not contain content"
+                );
+            }
+
+            JsonNode parts =
+                    content.get("parts");
+
+            if (parts == null || parts.isEmpty()) {
+
+                throw new RuntimeException(
+                        "Gemini response does not contain parts"
+                );
+            }
+
+            JsonNode textNode =
+                    parts.get(0).get("text");
+
+            if (textNode == null) {
+
+                throw new RuntimeException(
+                        "Gemini response does not contain text"
+                );
+            }
+
+            String text = textNode.asText();
+
+            System.out.println("AI Generated Text:");
+            System.out.println(text);
+
+            // Remove markdown code fences if Gemini adds them
+            text = text.trim();
+
+            if (text.startsWith("```json")) {
+                text = text.substring(7);
+            }
+
+            if (text.startsWith("```")) {
+                text = text.substring(3);
+            }
+
+            if (text.endsWith("```")) {
+                text = text.substring(
+                        0,
+                        text.length() - 3
+                );
+            }
+
+            text = text.trim();
 
             AiResponse responseObject =
-                    mapper.readValue(text, AiResponse.class);
+                    mapper.readValue(
+                            text,
+                            AiResponse.class
+                    );
 
             return responseObject;
 
@@ -115,7 +202,10 @@ public class AiServiceImpl implements AiService {
 
             e.printStackTrace();
 
-            throw new RuntimeException("Gemini API call failed", e);
+            throw new RuntimeException(
+                    "Gemini API call failed: " + e.getMessage(),
+                    e
+            );
         }
     }
 }

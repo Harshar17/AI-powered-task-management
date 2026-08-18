@@ -52,19 +52,46 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		String token = authHeader.substring(7);
 
 		String email;
-
+		
 		try {
-			email = jwtService.extractEmail(token);
+		    email = jwtService.extractEmail(token);
+
+		    System.out.println("========== JWT DEBUG ==========");
+		    System.out.println("JWT EMAIL: " + email);
+
 		} catch (Exception e) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+
+		    System.out.println("========== JWT ERROR ==========");
+		    e.printStackTrace();
+
+		    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		    return;
 		}
 
+//		try {
+//			email = jwtService.extractEmail(token);
+//		} catch (Exception e) {
+//			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return;
+//		}
+
+//		Optional<User> optionalUser = userRepository.findByEmail(email);
+//
+//		if (optionalUser.isEmpty()) {
+//			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return;
+//		}
+		
 		Optional<User> optionalUser = userRepository.findByEmail(email);
 
+		System.out.println("USER FOUND: " + optionalUser.isPresent());
+
 		if (optionalUser.isEmpty()) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+
+		    System.out.println("USER NOT FOUND FOR EMAIL: " + email);
+
+		    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		    return;
 		}
 
 		User user = optionalUser.get();

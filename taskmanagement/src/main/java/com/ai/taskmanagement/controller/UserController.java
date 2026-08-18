@@ -53,9 +53,9 @@ public class UserController {
 		return response;
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-	    return "JWT authentication successful";
-	}
+//	@GetMapping("/test")
+//	public String test() {
+//	    return "JWT authentication successful";
+//	}
 
 }

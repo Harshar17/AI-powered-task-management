@@ -1,6 +1,7 @@
 package com.ai.taskmanagement.model;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.Column;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,9 @@ public class Task {
     @NotBlank(message = "Title is required")
     private String title;
 
+    
     @NotBlank(message = "Description is required")
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @NotBlank(message = "Status is required")
