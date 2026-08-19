@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 		 String path = request.getServletPath();
 			
-		System.out.println("JWT FILTER PATH: " + path);
+	
 
 		return path.equals("/api/auth/login") || path.equals("/api/auth/register");
 	}
@@ -56,13 +56,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		try {
 		    email = jwtService.extractEmail(token);
 
-		    System.out.println("========== JWT DEBUG ==========");
-		    System.out.println("JWT EMAIL: " + email);
-
+		
 		} catch (Exception e) {
 
-		    System.out.println("========== JWT ERROR ==========");
-		    e.printStackTrace();
+
 
 		    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		    return;
@@ -84,11 +81,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		Optional<User> optionalUser = userRepository.findByEmail(email);
 
-		System.out.println("USER FOUND: " + optionalUser.isPresent());
+
 
 		if (optionalUser.isEmpty()) {
 
-		    System.out.println("USER NOT FOUND FOR EMAIL: " + email);
+
 
 		    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		    return;
@@ -100,7 +97,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				null, new ArrayList<>());
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		System.out.println("JWT FILTER PASSED: " + request.getRequestURI());
 		filterChain.doFilter(request, response);
 	}
 

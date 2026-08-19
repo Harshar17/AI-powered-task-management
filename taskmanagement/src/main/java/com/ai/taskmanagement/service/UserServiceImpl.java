@@ -41,14 +41,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public LoginResponse loginUser(String email, String password) {
 
-	    System.out.println("========== LOGIN DEBUG ==========");
-	    System.out.println("Login email: " + email);
+
 
 	    Optional<User> optional = userRepository.findByEmail(email);
 
 	    if (optional.isEmpty()) {
 
-	        System.out.println("USER NOT FOUND");
+
 
 	        throw new InvalidCredentialsException(
 	                "Invalid email or password"
@@ -57,31 +56,25 @@ public class UserServiceImpl implements UserService{
 
 	    User user = optional.get();
 
-	    System.out.println("USER FOUND: " + user.getEmail());
-	    System.out.println("Stored password starts with: "
-	            + user.getPassword().substring(0,
-	                    Math.min(10, user.getPassword().length())));
 
 	    boolean passwordMatches =
 	            passwordEncoder.matches(password, user.getPassword());
 
-	    System.out.println("PASSWORD MATCH: " + passwordMatches);
+	
 
 	    if (!passwordMatches) {
 
-	        System.out.println("PASSWORD DOES NOT MATCH");
+
 
 	        throw new InvalidCredentialsException(
 	                "Invalid email or password"
 	        );
 	    }
 
-	    System.out.println("PASSWORD MATCHED");
-	    System.out.println("GENERATING JWT...");
 
 	    String token = jwtService.generateToken(user);
 
-	    System.out.println("JWT GENERATED");
+
 
 	    LoginResponse response = new LoginResponse();
 	    response.setToken(token);

@@ -42,7 +42,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(
                 List.of(
                         "http://localhost:5173",
-                        "https://innovative-healing-production-a0a7.up.railway.app"
+                        "https://harsha-ai-task-manager.up.railway.app"
                 )
         );
 
