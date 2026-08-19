@@ -18,7 +18,7 @@ public class AiServiceImpl implements AiService {
     @Override
     public AiResponse generateTask(String title) {
 
-        String apiKey = System.getenv("Gemini-API");
+    	String apiKey = System.getenv("GEMINI_API_KEY");
 
         if (apiKey == null || apiKey.isBlank()) {
             throw new RuntimeException("Gemini API key is missing");
